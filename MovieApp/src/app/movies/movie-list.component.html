@@ -1,15 +1,11 @@
 <table class="table table-striped">
   <thead>
-    <th>Title</th>
-    <th>Director</th>
-    <th>Released</th>
+    <th>Info</th>
   </thead>
   <tbody>
     @for (movie of movies; track movie) {
     <tr>
-      <td>{{movie.title}}</td>
-      <td>{{movie.director}}</td>
-      <td>{{movie.releaseDate}}</td>
+      <td>{{movie.description}}</td>
     </tr>
     }
     @empty {
