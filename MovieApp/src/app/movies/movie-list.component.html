@@ -4,11 +4,16 @@
     <th>Director</th>
     <th>Released</th>
   </thead>
-<tbody>
-  <tr *ngFor="let movie of movies">
-    <td>{{movie.title}}</td>
-    <td>{{movie.director}}</td>
-    <td>{{movie.releaseDate}}</td>
-  </tr>
-</tbody>
+  <tbody>
+    @for (movie of movies; track movie) {
+    <tr>
+      <td>{{movie.title}}</td>
+      <td>{{movie.director}}</td>
+      <td>{{movie.releaseDate}}</td>
+    </tr>
+    }
+    @empty {
+    <div class="alert">No movies</div>
+    }
+  </tbody>
 </table>
