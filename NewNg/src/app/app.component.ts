@@ -6,13 +6,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: "app.component.html",
+  templateUrl: './app.component.html',
   styles: [],
 })
 export class AppComponent {
-  title = 'HelloNg';
-
-  sayHello() {
-    console.log("Hello there");
-  }
+  title = 'NewNg';
 }

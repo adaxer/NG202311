@@ -3,11 +3,10 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HelloNg": {
+    "NewNg": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineTemplate": false,
           "inlineStyle": true,
           "skipTests": true
         },
@@ -40,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/hello-ng",
+            "outputPath": "dist/new-ng",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -52,7 +51,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -85,10 +83,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "HelloNg:build:production"
+              "buildTarget": "NewNg:build:production"
             },
             "development": {
-              "buildTarget": "HelloNg:build:development"
+              "buildTarget": "NewNg:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "HelloNg:build"
+            "buildTarget": "NewNg:build"
           }
         }
       }
