@@ -13,4 +13,8 @@ export class MovieService {
   getMovies(): Observable<Movie[]> {
     return this.client.get<Movie[]>("https://localhost:7027/Movie/List/10/2");
   }
+
+  getMovie(id: number): Observable<Movie> {
+    return this.client.get<Movie>(`https://localhost:7027/Movie/${id}`);
+  }
 }

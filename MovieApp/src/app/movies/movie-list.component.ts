@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { MovieService } from '../services/movie.service';
 import { Movie } from '../models/movie';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor, RouterModule],
   templateUrl: './movie-list.component.html',
   styles: ``
 })
