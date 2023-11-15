@@ -1,1 +1,32 @@
-<p>welcome works!</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="mb-3">
+    <label class="form-label" for="firstName">First name:</label>
+    <input class="form-control " id="firstName" type="text" formControlName="firstNameInForm" [(ngModel)]="firstName"
+      placeholder="Enter first name">
+    @if (form.controls['firstNameInForm'].errors?.['required'] && form.controls['firstNameInForm'].touched) {
+    <div class="text-danger ">
+      First name is required
+    </div>
+    }
+    <label class="form-label" for="lastName">Last name:</label>
+    <input class="form-control " id="lastName" type="text" formControlName="lastName" [(ngModel)]="lastName"
+      placeholder="Enter last name">
+    @if (form.controls['lastName'].errors?.['required'] && form.controls['lastName'].touched) {
+    <div class="text-danger ">
+      Last name is required
+    </div>
+    }
+  </div>
+
+  <button [disabled]="form.invalid" class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+
+@if(fullName().length) {
+<div class="text-success">Hello, {{fullName()}}</div>
+}
+@else {
+<div class="text-danger">Nobody there</div>
+}
+
+{{ fullName2 }}
