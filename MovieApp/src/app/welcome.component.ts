@@ -2,11 +2,12 @@ import { Component, computed, signal } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CanBeDirty } from './models/can-be-dirty';
+import { ToUpperPipe } from './pipes/to-upper.pipe';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf,ToUpperPipe],
   templateUrl: './welcome.component.html',
   styles: ``
 })
@@ -35,6 +36,8 @@ export class WelcomeComponent implements CanBeDirty{
   get fullName2(): string {
     return this.firstName + " " + this.lastName;
   }
+
+  price=22.50;
 
   onSubmit() {
     this.form.markAllAsTouched();
