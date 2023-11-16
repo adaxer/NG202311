@@ -1,4 +1,5 @@
-﻿using MovieBase.Common;
+﻿using Microsoft.AspNetCore.SignalR;
+using MovieBase.Common;
 using MovieBase.Data;
 using System.Diagnostics;
 
@@ -23,12 +24,15 @@ public class AddMoviesService : IHostedService
     {
         while (true)
         {
-            await Task.Delay(500000);
+            await Task.Delay(5000);
             using (var scope = serviceProvider.CreateScope())
             {
                 using var db = scope.ServiceProvider.GetRequiredService<MovieContext>();
                 await db.Movies.AddAsync(new Movie { Title = $"New Movie released at {DateTime.Now}" });
                 await db.SaveChangesAsync();
+
+                var hub = scope.ServiceProvider.GetRequiredService<IHubContext<MessageHub>>();
+                await hub.Clients.All.SendAsync("message", $"New Movie released at {DateTime.Now}");
             }
         }
     }

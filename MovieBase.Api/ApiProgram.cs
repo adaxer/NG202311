@@ -35,7 +35,14 @@ public class ApiProgram
         //    });
         //});
 
-        builder.Services.AddCors();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", builder => builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+        });
 
         builder.Services.AddControllers()
             .AddNewtonsoftJson()
@@ -45,13 +52,15 @@ public class ApiProgram
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<MovieContext>(b=>b.UseInMemoryDatabase("MoviesInMemory.db"));
+        builder.Services.AddDbContext<MovieContext>(b => b.UseInMemoryDatabase("MoviesInMemory.db"));
 
         builder.Services.AddHostedService<AddMoviesService>();
-        builder.Services.AddAutoMapper(options=>options.AddProfile<MapperProfile>());
+        builder.Services.AddAutoMapper(options => options.AddProfile<MapperProfile>());
+        builder.Services.AddSignalR(c => c.KeepAliveInterval = TimeSpan.FromSeconds(10));
+
 
         ////////////////////////////////////////////
-        
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -62,16 +71,18 @@ public class ApiProgram
         }
 
         app.UseHttpsRedirection();
-   //     app.UseAuthentication();
+        //     app.UseAuthentication();
+        app.UseRouting();
+        app.UseCors("CorsPolicy");
         app.UseAuthorization();
-        app.UseCors(action =>
-        {
-            action.AllowAnyOrigin();
-            action.AllowAnyMethod();
-            action.AllowAnyHeader();
-        });
 
-        app.MapControllers();
+#pragma warning disable ASP0014 // Suggest using top level route registrations
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHub<MessageHub>("/messages");
+        });
+#pragma warning restore ASP0014 // Suggest using top level route registrations
 
         app.Run();
     }
