@@ -3,11 +3,12 @@ import { CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CanBeDirty } from './models/can-be-dirty';
 import { ToUpperPipe } from './pipes/to-upper.pipe';
+import { LedComponent } from './controls/led.component';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf,ToUpperPipe],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, LedComponent,ToUpperPipe],
   templateUrl: './welcome.component.html',
   styles: ``
 })
@@ -17,6 +18,8 @@ export class WelcomeComponent implements CanBeDirty{
     firstNameInForm: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required])
   });
+
+  startColor = "Red";
 
   isDirty = false;
   firstNameSignal = signal("");
@@ -45,5 +48,9 @@ export class WelcomeComponent implements CanBeDirty{
       // this.firstName = this.form.controls["firstNameInForm"].value;
       this.isDirty=false;
     }
+  }
+
+  ledChanged(newColor: string){
+    console.log("Led changed to ", newColor);
   }
 }

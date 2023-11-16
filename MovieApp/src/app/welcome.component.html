@@ -34,3 +34,5 @@
   {{ price | currency:'EUR':true }}
   </div>
 
+{{ fullName2 }}
+<app-led [color]="startColor" (colorChanged)="ledChanged($event)"></app-led>
