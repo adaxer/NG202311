@@ -8,7 +8,7 @@ describe('ToUpperPipe', () => {
     pipe = new ToUpperPipe();
   });
   [
-    { parameter: "_Hello", result: "HELLO" },
+    { parameter: "_Hello", result: "_HELLO" },
     { parameter: "worlD", result: "WORLD" },
     { parameter: "", result: ""}
   ].forEach((dataSet) => {
