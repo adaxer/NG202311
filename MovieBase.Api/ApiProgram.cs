@@ -72,8 +72,8 @@ public class ApiProgram
 
         app.UseHttpsRedirection();
         //     app.UseAuthentication();
-        app.UseCors("CorsPolicy");
         app.UseRouting();
+        app.UseCors("CorsPolicy");
         app.UseAuthorization();
 
 #pragma warning disable ASP0014 // Suggest using top level route registrations

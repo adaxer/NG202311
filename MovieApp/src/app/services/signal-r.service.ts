@@ -9,6 +9,7 @@ export class SignalRService {
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:7027/messages')
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
