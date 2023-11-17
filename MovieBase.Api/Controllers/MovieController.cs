@@ -32,8 +32,9 @@ public class MovieController : ControllerBase
     [ResponseCache(Duration=10)]
     public async Task<IActionResult> List(int pageSize, int page)
     {
-        await Task.Delay(1000);
-        var result = (await db.Movies.Skip(page * pageSize).Take(pageSize).ToListAsync()).Select(mapper.Map<Movie, MovieDTO>).ToList();
+        var count = await db.Movies.CountAsync();
+        var data = (await db.Movies.Skip(page * pageSize).Take(pageSize).ToListAsync()).Select(mapper.Map<Movie, MovieDTO>).ToList();
+        var result = new ResultPage<MovieDTO>{ Data = data, Page=page, PageSize=pageSize, TotalCount=count };
         return Ok(result);
     }
 

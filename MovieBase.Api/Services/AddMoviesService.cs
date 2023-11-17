@@ -22,9 +22,11 @@ public class AddMoviesService : IHostedService
 
     private async void Run()
     {
+        int waitTime = 5000;
         while (true)
         {
-            await Task.Delay(5000);
+            await Task.Delay(waitTime);
+            waitTime = 60000;
             using (var scope = serviceProvider.CreateScope())
             {
                 using var db = scope.ServiceProvider.GetRequiredService<MovieContext>();

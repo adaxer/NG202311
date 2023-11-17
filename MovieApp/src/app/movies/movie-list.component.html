@@ -13,3 +13,30 @@
     }
   </tbody>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" (click)="loadPage(1)" aria-label="First">
+        <span aria-hidden="true">&lt;&lt;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="loadPage(currentPage-1)" aria-label="Previous">
+        <span aria-hidden="true">&lt;</span>
+      </a>
+    </li>
+    @for(page of pages; track page){
+    <li class="page-item"  [ngClass]="(page===currentPage) ? 'active' : ''"><a class="page-link" (click)="loadPage(page)">{{page}}</a></li>
+    }
+    <li class="page-item">
+      <a class="page-link" (click)="loadPage(currentPage+1)" aria-label="Next">
+        <span aria-hidden="true">&gt;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="loadPage(totalPages)" aria-label="Last">
+        <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
