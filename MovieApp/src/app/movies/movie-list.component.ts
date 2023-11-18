@@ -21,6 +21,7 @@ export class MovieListComponent implements OnInit {
   currentPage = 1;
   resultPage?: ResultPage<Movie>;
   totalPages: number = 1;
+  token: string = "";
   constructor(private movieService: MovieService, private signalR: SignalRService) {
   }
 
@@ -52,6 +53,17 @@ export class MovieListComponent implements OnInit {
       let pageCnt = Math.min(this.totalPages, this.pagesShown)
       let firstPage = page < this.pages[0] ? page : page - pageCnt + 1;
       this.pages = this.fillArray(firstPage, pageCnt)
+    });
+  }
+
+  register() {
+    this.movieService.register().subscribe(r => console.log("Register succeeded: ", r));
+  }
+
+  login() {
+    this.movieService.login().subscribe(r => {
+      console.log("Login succeeded: ", r);
+      this.loadPage(1);
     });
   }
 }
