@@ -1,0 +1,42 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@url=https://localhost:7027
+@password=P@$$w0rd1
+@email=admin@notadomain.com
+
+@token=CfDJ8JHE-tf9yUBDnwjMNhyy7Tvj2sKawngD60U-Bb_3WeCGt3xy8AL6tIZPsaG89t4qb3CDkQv1gcUNr5j_jMvbBbWGhEjKIt_CU3ua6omEKXM1GIZ2VVmYWA093b8-_48T192YSWFcEmtdlDSCF2b4OUX7DslPGay-IW3qs61U-6zM1038O5pavRSnWZZpIFu2E4IcXo-RSrvTFg51a8ic2DH-110OyfcngUp5IVWRyX__Ryy7E6j6u9pWxGoiu_2JqiYsw0ZlsniX96cwVvurN5hxp2LlrMuNhVSA2M6fc8QXkGEVo4e9KrUbMPexdTq4HW_eyuyT5PhUdr7AD5sQnL_CvyLe4Co5LKIgmYMoIB0uWATGQeQGeEvDyj-CkpMC0jolIdNKTV_RY9-WXFBBsUmMKTnM6RjMWfmIM6ff4r9hS1D6klQ_-IMUN-2HPJNSoa1nGKptUC5RRwf7TZoZyYo557D9M0reHHjcyeAnKZCEygeq_sHWfrGY0axtTT71rZBav0R7URzFg6R8BZqi5cwiud5sC8FkDHp5MAm7A7ppWActjhQxTqc_DE_9V5LjxL9MTxd3kl_c6w7DrfmAKyyiLzr6IxA2q4C6p8YWM1NuPLNuiRo5fjCbjQ_wZR2Khl9jNL7zRqBSlEzRXFIyPS9rARHBHOzHGVVmP_g6BiTwoAYc5XRoxZq-F99n6TIas1e-JsrZD96GNUk2JVZCvEs
+
+GET {{url}}/movie/list/2/0
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{url}}/register
+Content-Type: application/json
+
+{
+  "password": "{{password}}",
+  "email": "{{email}}"
+}
+
+###
+
+POST {{url}}/login?useCookies=false
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+
+@refreshToken=<your refresh token here>
+
+POST {{url}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}

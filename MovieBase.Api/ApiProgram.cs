@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using MovieBase.Api.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace MovieBase.Api;
 
@@ -13,8 +15,6 @@ public class ApiProgram
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Add services to the container.
 
         builder.Services.AddCors(options =>
         {
@@ -28,6 +28,13 @@ public class ApiProgram
         builder.Services.AddControllers()
             .AddNewtonsoftJson()
             .AddXmlSerializerFormatters();
+
+
+        builder.Services.AddAuthorization();
+        builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("AppDb"));
+        builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+                        .AddEntityFrameworkStores<AppDbContext>();
+
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -65,6 +72,15 @@ public class ApiProgram
         });
 #pragma warning restore ASP0014 // Suggest using top level route registrations
 
+        // Adds /register, /login and /refresh endpoints
+        app.MapIdentityApi<IdentityUser>();
+
         app.Run();
     }
+}
+
+
+class AppDbContext : IdentityDbContext<IdentityUser>
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 }

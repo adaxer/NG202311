@@ -12,6 +12,7 @@ using MovieBase.Data;
 
 namespace MovieBase.Api.Controllers;
 [ApiController]
+[Authorize]
 [EnableCors("CorsPolicy")]
 [Route("[controller]")]
 public class MovieController : ControllerBase
