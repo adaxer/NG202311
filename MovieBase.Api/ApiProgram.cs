@@ -16,25 +16,6 @@ public class ApiProgram
 
         // Add services to the container.
 
-        //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        //.AddJwtBearer(options =>
-        //{
-        //    options.Authority = "https://localhost:5555";  // Your IdentityServer's address
-        //    options.RequireHttpsMetadata = false; // Use this for development, turn it on for production
-        //    options.TokenValidationParameters.ValidateAudience = false;
-        //    options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
-        //});
-
-        //builder.Services.AddAuthorization(options =>
-        //{
-        //    options.AddPolicy("Admin", policy =>
-        //    {
-        //        policy
-        //            .RequireRole("admin")
-        //            .RequireClaim(ClaimTypes.Email);
-        //    });
-        //});
-
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy", builder => builder
